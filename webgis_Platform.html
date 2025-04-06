@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>WebGIS Map</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+</head>
+<body>
+    <div id="map" style="height: 600px;"></div>
+    <script>
+        var map = L.map('map').setView([23.03, 72.58], 10);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© OpenStreetMap contributors'
+        }).addTo(map);
+
+        var wmsLayer = L.tileLayer.wms('http://localhost:8080/geoserver/your_workspace/wms', {
+            layers: 'your_workspace:sample_points',
+            format: 'image/png',
+            transparent: true
+        }).addTo(map);
+    </script>
+</body>
+</html>
